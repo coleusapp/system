@@ -2,9 +2,9 @@
 
 namespace Coleus\System;
 
+use Coleus\System\Commands\SystemCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Coleus\System\Commands\SystemCommand;
 
 class SystemServiceProvider extends PackageServiceProvider
 {
