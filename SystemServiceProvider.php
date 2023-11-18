@@ -2,25 +2,34 @@
 
 namespace Coleus\System;
 
-use Coleus\System\Commands\SystemCommand;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class SystemServiceProvider extends PackageServiceProvider
+class SystemServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+    public function register()
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('system')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_system_table')
-            ->hasRoute('system')
-            ->hasCommand(SystemCommand::class);
+        $this->app->bind('system', function ($app) {
+            return new System();
+        });
     }
+
+    public function boot()
+    {
+        //
+    }
+    // public function configurePackage(Package $package): void
+    // {
+    //     /*
+    //      * This class is a Package Service Provider
+    //      *
+    //      * More info: https://github.com/spatie/laravel-package-tools
+    //      */
+    //     $package
+    //         ->name('system')
+    //         ->hasConfigFile()
+    //         ->hasViews()
+    //         ->hasMigration('create_system_table')
+    //         ->hasRoute('system')
+    //         ->hasCommand(SystemCommand::class);
+    // }
 }
