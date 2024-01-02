@@ -8,6 +8,13 @@ class SystemServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'system');
+        $this->mergeConfigFrom(__DIR__.'/config/system.php', 'system');
+        $this->publishes([
+            __DIR__.'/resources/dist' => public_path('dist/coleus/system')
+        ], 'dist');
+
         $this->app->bind('system', function ($app) {
             return new System();
         });
@@ -17,19 +24,4 @@ class SystemServiceProvider extends ServiceProvider
     {
         //
     }
-    // public function configurePackage(Package $package): void
-    // {
-    //     /*
-    //      * This class is a Package Service Provider
-    //      *
-    //      * More info: https://github.com/spatie/laravel-package-tools
-    //      */
-    //     $package
-    //         ->name('system')
-    //         ->hasConfigFile()
-    //         ->hasViews()
-    //         ->hasMigration('create_system_table')
-    //         ->hasRoute('system')
-    //         ->hasCommand(SystemCommand::class);
-    // }
 }
